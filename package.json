@@ -1,0 +1,27 @@
+{
+  "name": "glyph-js",
+  "version": "0.1.4",
+  "description": "Javascript port of GLYPH via Emscripten",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "engines": {
+    "node": ">=4.4.7"
+  },
+  "keywords": [
+    "GLP",
+    "GLYPH",
+    "Post Quantum Signature",
+    "cryptography"
+  ],
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*"
+  },
+  "license": "MIT"
+}
