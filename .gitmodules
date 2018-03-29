@@ -1,0 +1,3 @@
+[submodule "lib/glyph"]
+	path = lib/glyph
+	url = git@github.com:veritas-shine/glyph.git

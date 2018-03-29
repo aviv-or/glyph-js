@@ -18,7 +18,10 @@ using namespace v8;
 void GenKey(const FunctionCallbackInfo<Value>& args) {
   Isolate* isolate = args.GetIsolate();
 
-  unsigned char* seed = (unsigned char*)node::Buffer::Data(args[0]);
+  unsigned char* seed = NULL;
+  if (!args[0]->IsUndefined()) {
+    seed = (unsigned char*)node::Buffer::Data(args[0]);
+  }
   v8::Local<v8::Value> sk = node::Buffer::New(isolate, glyph_private_keysize()).ToLocalChecked();
   v8::Local<v8::Value> pk = node::Buffer::New(isolate, glyph_public_keysize()).ToLocalChecked();
 
