@@ -11,15 +11,14 @@ INC =
 LIB =
 
 #make target lib and relevant obj
-PRG = glyph
-TES = test_glyph
-SRCS = glp.c debug.c glp_utils.c debug.c test/test.c test/test_vectors.c glp_rand.c sha256.c glp_rand_openssl_aes.c FFT/FFT_1024_59393.c aes/aes_core.c aes/aes_ctr.c
+PRG = libglyph.a
+SRCS = glp.c glyph.c glp_utils.c glp_rand.c sha256.c glp_rand_openssl_aes.c FFT/FFT_1024_59393.c aes/aes_core.c aes/aes_ctr.c
 OBJ := ${SRCS:.c=.o}
 
 #all target
 all:$(PRG)
 $(PRG):$(OBJ)
-	${CC} -o $@ $^
+	${AR} rcs $@ $^
 
 .SUFFIXES: .c .o
 .c.o:

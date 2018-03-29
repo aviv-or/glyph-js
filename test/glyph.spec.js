@@ -35,16 +35,13 @@ describe('GLYPH test', function () {
       0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1e, 0x1f]));
     const message = Buffer.from('testtest', 'utf8')
 
-    const keypair = new GLYPH(seed)
-    const signature = keypair.sign(message)
-    const result = keypair.verify(message, signature)
+    const keypair = GLYPH.createKey(seed)
+    console.log(keypair)
 
-    assert.equal(privateKeyEqual(keypair.privateKey()), true)
-    console.log(keypair.pksize, keypair.sksize, keypair.sigsize, keypair.publicKey())
-    console.log(signature, result)
-    assert.equal(polyEqual(keypair.publicKey(), data.pk, 0, GLYPH.N), true)
+    var sig = GLYPH.sign(message, keypair.private)
+    console.log(sig)
 
-    keypair.dispose()
-    // console.log(keypair.publicKey().toString('hex'), keypair.privateKey().toString('hex'))
+    var ret = GLYPH.verify(sig, message, keypair.public)
+    console.log(ret)
   });
 })

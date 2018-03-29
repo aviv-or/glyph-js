@@ -2,9 +2,10 @@
   "name": "glyph-js",
   "version": "0.0.1",
   "description": "Javascript port of GLYPH via Emscripten",
-  "main": "lib/main.js",
+  "main": "./main.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "install": "(node install.js) || (exit 0)"
   },
   "repository": {
     "type": "git",
