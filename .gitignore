@@ -3,3 +3,4 @@ node_modules/
 *.o
 *.a
 lib/glyph.js
+lib/glyph/glyph
