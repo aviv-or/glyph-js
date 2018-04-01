@@ -6,4 +6,3 @@ lib/glyph.js
 lib/glyph/glyph
 binding.gyp
 build
-addon-*.node
