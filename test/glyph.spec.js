@@ -50,6 +50,10 @@ describe('GLYPH test', function () {
     var ret = keypair.verify(sig, message)
     assert.equal(ret, 1)
 
+    var s2 = GLYPH.sign(message, keypair.privateKey())
+    ret = GLYPH.verify(s2, message, keypair.publicKey())
+    assert.equal(ret, 1)
+
     keypair.dispose()
   });
 

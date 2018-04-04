@@ -37,10 +37,6 @@ function prepareHeapForBuffer(nbytes, buffer) {
   return dataHeap
 }
 
-function readBufferFromMemory(dataHeap, size) {
-  return new Uint8Array(dataHeap.buffer, dataHeap.byteOffset, size)
-}
-
 /**
  *
  * @param seed {Buffer | null}
@@ -77,7 +73,7 @@ GLYPH.prototype.publicKey = function () {
 
 /**
  *
- * @return {Uint8Array}
+ * @return {Buffer}
  */
 GLYPH.prototype.privateKey = function () {
   return Buffer.from(new Uint8Array(gModule.HEAPU8.buffer, this.sk, this.sksize))
@@ -86,18 +82,42 @@ GLYPH.prototype.privateKey = function () {
 /**
  *
  * @param message {Buffer}
+ * @param sk {Number}
  * @return {Buffer}
  */
-GLYPH.prototype.sign = function (message) {
-  var sig = gModule._malloc(this.sigsize)
+function sign(message, sk) {
+  var sigsize = glyph_signature_size()
+  var sig = gModule._malloc(sigsize)
   var msg = prepareHeapForBuffer(message.byteLength, message)
   let buffer = null
-  if (glyph_sign(sig, msg.byteOffset, message.byteLength, this.sk)) {
-    buffer = Buffer.from(new Uint8Array(gModule.HEAPU8.buffer, sig, this.sigsize))
+  if (glyph_sign(sig, msg.byteOffset, message.byteLength, sk)) {
+    buffer = Buffer.from(new Uint8Array(gModule.HEAPU8.buffer, sig, sigsize))
   }
   gModule._free(msg.byteOffset)
   gModule._free(sig)
   return buffer
+}
+
+/**
+ *
+ * @param message {Buffer}
+ * @return {Buffer}
+ */
+GLYPH.prototype.sign = function (message) {
+  return sign(message, this.sk)
+}
+
+/**
+ *
+ * @param message {Buffer}
+ * @param privateKey {Buffer}
+ * @return {Buffer}
+ */
+GLYPH.sign = function (message, privateKey) {
+  var sk = prepareHeapForBuffer(privateKey.length, privateKey)
+  var ret = sign(message, sk.byteOffset)
+  gModule._free(sk.byteOffset)
+  return ret
 }
 
 /**
