@@ -2,7 +2,6 @@
 node_modules/
 *.o
 *.a
-lib/glyph.js
 lib/glyph/glyph
 binding.gyp
 build

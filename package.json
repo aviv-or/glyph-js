@@ -1,6 +1,6 @@
 {
   "name": "glyph-js",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Javascript port of GLYPH via Emscripten",
   "main": "./main.js",
   "scripts": {
@@ -10,11 +10,7 @@
   },
   "files": [
     "lib/addon*.node",
-    "binding_darwin.gyp",
-    "binding_linux.gyp",
-    "install.js",
     "main.js",
-    "module.cc",
     "LICENSE"
   ],
   "repository": {
