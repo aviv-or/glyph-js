@@ -1,15 +1,13 @@
 {
   "name": "glyph-js",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Javascript port of GLYPH via Emscripten",
   "main": "./main.js",
   "scripts": {
-    "test": "mocha",
-    "install": "(node install.js) || (exit 0)",
-    "build": "(node-gyp rebuild) || (exit 0)"
+    "test": "mocha"
   },
   "files": [
-    "lib/addon*.node",
+    "lib/glyph.js",
     "main.js",
     "LICENSE"
   ],
